@@ -35,8 +35,11 @@ A fun and addictive Flappy Bird-style game featuring a cute chicken character!
 - Try to achieve the highest score possible!
 
 ### Game Features
-- **Chicken Character**: Cute brown chicken with red comb and wattle
-- **Beautiful Graphics**: Sky gradient background with animated clouds
+- **Bright Golden Chicken**: Vibrant, eye-catching chicken character with red comb and wattle
+- **Realistic City Skyline**: Beautiful pastel-colored buildings with lit windows
+- **Glorious Sun**: Glowing sun with rays in the sky
+- **Enhanced Clouds**: Detailed cloud formations
+- **Realistic Pipes**: 3D pipes with depth and shadows (no grid lines)
 - **Score Tracking**: Real-time score display
 - **Game Over Screen**: Shows your final score with a restart button
 - **Smooth Physics**: Realistic gravity and flapping mechanics
@@ -64,6 +67,8 @@ The game ends when:
 - Responsive design
 - Works on desktop and mobile browsers
 - No external dependencies required
+- Realistic 3D effects with gradients and shadows
+- Dynamic lighting system for building windows
 
 ## Development
 
@@ -77,12 +82,20 @@ The game can be run in several ways:
 ### File Structure
 ```
 FlappyChicken/
-├── flappy-bird.html  # Main game file
+├── flappy-bird.html  # Main game file with realistic graphics
 ├── README.md         # This instruction file
 ├── package.json      # Project configuration
 ├── LICENSE           # MIT license
 └── .gitignore        # Git ignore rules
 ```
+
+### Visual Features
+- **Bright Golden Chicken**: Stands out against the city background
+- **Pastel City Skyline**: Dull, flat buildings in soft colors
+- **Realistic Pipes**: 3D pipes with shadows and depth
+- **Glorious Sun**: Beautiful sun with rays
+- **Enhanced Clouds**: Multiple detailed cloud formations
+- **Brown Earth Ground**: Simple textured ground
 
 ## Project Files
 ```

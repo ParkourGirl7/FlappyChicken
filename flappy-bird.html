@@ -209,28 +209,53 @@
             }
         }
 
-        // Draw chicken
+        // Draw realistic chicken with depth
         function drawBird() {
-            // Chicken body (brown/reddish)
-            ctx.fillStyle = '#D2691E';
+            
+            // Chicken body with bright gradient (stands out)
+            const bodyGradient = ctx.createRadialGradient(
+                bird.x + bird.size/2 - 3, bird.y + bird.size/2 - 3, 0,
+                bird.x + bird.size/2, bird.y + bird.size/2, bird.size/2
+            );
+            bodyGradient.addColorStop(0, '#FFD700');  // Bright gold
+            bodyGradient.addColorStop(0.7, '#FF8C00'); // Bright orange
+            bodyGradient.addColorStop(1, '#FF4500');   // Bright red-orange
+            ctx.fillStyle = bodyGradient;
             ctx.beginPath();
             ctx.arc(bird.x + bird.size/2, bird.y + bird.size/2, bird.size/2, 0, Math.PI * 2);
             ctx.fill();
             
-            // Chicken head (lighter brown)
-            ctx.fillStyle = '#F4A460';
+            // Chicken head with bright gradient (stands out)
+            const headGradient = ctx.createRadialGradient(
+                bird.x + bird.size/2 + 6, bird.y + bird.size/2 - 4, 0,
+                bird.x + bird.size/2 + 8, bird.y + bird.size/2 - 2, bird.size/3
+            );
+            headGradient.addColorStop(0, '#FFFFE0');  // Light yellow
+            headGradient.addColorStop(0.7, '#FFD700'); // Bright gold
+            headGradient.addColorStop(1, '#FF8C00');   // Bright orange
+            ctx.fillStyle = headGradient;
             ctx.beginPath();
             ctx.arc(bird.x + bird.size/2 + 8, bird.y + bird.size/2 - 2, bird.size/3, 0, Math.PI * 2);
             ctx.fill();
             
-            // Chicken eye
+            // Chicken eye with highlight
             ctx.fillStyle = '#000';
             ctx.beginPath();
             ctx.arc(bird.x + bird.size/2 + 12, bird.y + bird.size/2 - 4, 2, 0, Math.PI * 2);
             ctx.fill();
+            ctx.fillStyle = '#FFF';
+            ctx.beginPath();
+            ctx.arc(bird.x + bird.size/2 + 12.5, bird.y + bird.size/2 - 4.5, 0.5, 0, Math.PI * 2);
+            ctx.fill();
             
-            // Chicken beak (orange/yellow)
-            ctx.fillStyle = '#FF8C00';
+            // Chicken beak with gradient (orange/yellow)
+            const beakGradient = ctx.createLinearGradient(
+                bird.x + bird.size/2 + 15, bird.y + bird.size/2 - 2,
+                bird.x + bird.size/2 + 20, bird.y + bird.size/2 - 2
+            );
+            beakGradient.addColorStop(0, '#FFD700');
+            beakGradient.addColorStop(1, '#FF8C00');
+            ctx.fillStyle = beakGradient;
             ctx.beginPath();
             ctx.moveTo(bird.x + bird.size/2 + 15, bird.y + bird.size/2 - 2);
             ctx.lineTo(bird.x + bird.size/2 + 20, bird.y + bird.size/2 - 2);
@@ -238,64 +263,227 @@
             ctx.closePath();
             ctx.fill();
             
-            // Chicken wing (darker brown)
-            ctx.fillStyle = '#8B4513';
+            // Chicken wing with gradient (darker brown)
+            const wingGradient = ctx.createRadialGradient(
+                bird.x + bird.size/2 - 3, bird.y + bird.size/2 + 3, 0,
+                bird.x + bird.size/2 - 5, bird.y + bird.size/2 + 5, 8
+            );
+            wingGradient.addColorStop(0, '#A0522D');
+            wingGradient.addColorStop(1, '#8B4513');
+            ctx.fillStyle = wingGradient;
             ctx.beginPath();
             ctx.ellipse(bird.x + bird.size/2 - 5, bird.y + bird.size/2 + 5, 8, 4, Math.PI/4, 0, Math.PI * 2);
             ctx.fill();
             
-            // Chicken comb (red)
-            ctx.fillStyle = '#DC143C';
+            // Chicken comb with bright gradient (stands out)
+            const combGradient = ctx.createRadialGradient(
+                bird.x + bird.size/2 + 6, bird.y + bird.size/2 - 10, 0,
+                bird.x + bird.size/2 + 8, bird.y + bird.size/2 - 8, 4
+            );
+            combGradient.addColorStop(0, '#FF0000');  // Bright red
+            combGradient.addColorStop(1, '#DC143C');  // Crimson
+            ctx.fillStyle = combGradient;
             ctx.beginPath();
             ctx.arc(bird.x + bird.size/2 + 8, bird.y + bird.size/2 - 8, 4, 0, Math.PI * 2);
             ctx.fill();
             
-            // Chicken wattle (red)
-            ctx.fillStyle = '#DC143C';
+            // Chicken wattle with gradient (red)
+            const wattleGradient = ctx.createRadialGradient(
+                bird.x + bird.size/2 + 8, bird.y + bird.size/2, 0,
+                bird.x + bird.size/2 + 10, bird.y + bird.size/2 + 2, 3
+            );
+            wattleGradient.addColorStop(0, '#FF6B6B');
+            wattleGradient.addColorStop(1, '#DC143C');
+            ctx.fillStyle = wattleGradient;
             ctx.beginPath();
             ctx.arc(bird.x + bird.size/2 + 10, bird.y + bird.size/2 + 2, 3, 0, Math.PI * 2);
             ctx.fill();
         }
 
-        // Draw pipes
+        // Draw realistic pipes with enhanced depth and texture
         function drawPipes() {
-            ctx.fillStyle = '#228B22';
             pipes.forEach(pipe => {
-                // Top pipe
+                // Enhanced pipe shadows
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+                ctx.fillRect(pipe.x + 4, 0, pipeWidth, pipe.gapY);
+                ctx.fillRect(pipe.x + 4, pipe.gapY + pipeGap, pipeWidth, canvas.height - pipe.gapY - pipeGap);
+                
+                // Pipe body with gradient for realism
+                const pipeGradient = ctx.createLinearGradient(pipe.x, 0, pipe.x + pipeWidth, 0);
+                pipeGradient.addColorStop(0, '#1B4D1B');  // Darker green
+                pipeGradient.addColorStop(0.3, '#228B22'); // Medium green
+                pipeGradient.addColorStop(0.7, '#32CD32'); // Lighter green
+                pipeGradient.addColorStop(1, '#1B4D1B');   // Darker green
+                ctx.fillStyle = pipeGradient;
+                
+                // Main pipe body
                 ctx.fillRect(pipe.x, 0, pipeWidth, pipe.gapY);
-                // Bottom pipe
                 ctx.fillRect(pipe.x, pipe.gapY + pipeGap, pipeWidth, canvas.height - pipe.gapY - pipeGap);
                 
-                // Pipe caps
-                ctx.fillStyle = '#006400';
-                ctx.fillRect(pipe.x - 5, pipe.gapY - 20, pipeWidth + 10, 20);
-                ctx.fillRect(pipe.x - 5, pipe.gapY + pipeGap, pipeWidth + 10, 20);
-                ctx.fillStyle = '#228B22';
+
+                
+                // Enhanced pipe caps with 3D effect
+                const capGradient = ctx.createLinearGradient(pipe.x - 5, 0, pipe.x + pipeWidth + 5, 0);
+                capGradient.addColorStop(0, '#0B3D0B');   // Very dark green
+                capGradient.addColorStop(0.3, '#006400'); // Dark green
+                capGradient.addColorStop(0.7, '#228B22'); // Medium green
+                capGradient.addColorStop(1, '#0B3D0B');   // Very dark green
+                ctx.fillStyle = capGradient;
+                
+                // Top cap
+                ctx.fillRect(pipe.x - 8, pipe.gapY - 25, pipeWidth + 16, 25);
+                // Bottom cap
+                ctx.fillRect(pipe.x - 8, pipe.gapY + pipeGap, pipeWidth + 16, 25);
+                
+                // Cap highlights for 3D effect
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.fillRect(pipe.x - 6, pipe.gapY - 23, pipeWidth + 12, 8);
+                ctx.fillRect(pipe.x - 6, pipe.gapY + pipeGap + 2, pipeWidth + 12, 8);
+                
+                // Cap shadows for depth
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+                ctx.fillRect(pipe.x - 6, pipe.gapY - 5, pipeWidth + 12, 8);
+                ctx.fillRect(pipe.x - 6, pipe.gapY + pipeGap + 17, pipeWidth + 12, 8);
+                
+                // Pipe edge highlights
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+                ctx.fillRect(pipe.x + 3, 0, 4, pipe.gapY);
+                ctx.fillRect(pipe.x + 3, pipe.gapY + pipeGap, 4, canvas.height - pipe.gapY - pipeGap);
+                
+                // Pipe edge shadows
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+                ctx.fillRect(pipe.x + pipeWidth - 4, 0, 4, pipe.gapY);
+                ctx.fillRect(pipe.x + pipeWidth - 4, pipe.gapY + pipeGap, 4, canvas.height - pipe.gapY - pipeGap);
             });
         }
 
-        // Draw background
+        // Draw classic Flappy Bird style background with sun
         function drawBackground() {
-            // Sky gradient
-            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            gradient.addColorStop(0, '#87CEEB');
-            gradient.addColorStop(1, '#98FB98');
-            ctx.fillStyle = gradient;
+            // Classic sky gradient (like original Flappy Bird)
+            const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            skyGradient.addColorStop(0, '#4EC0CA');  // Light blue sky
+            skyGradient.addColorStop(0.5, '#87CEEB'); // Sky blue
+            skyGradient.addColorStop(1, '#98FB98');   // Light green ground
+            ctx.fillStyle = skyGradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Clouds
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            // Sun with glow effect (keeping your sun!)
+            ctx.fillStyle = '#FFD700';
+            ctx.shadowColor = '#FFD700';
+            ctx.shadowBlur = 15;
             ctx.beginPath();
-            ctx.arc(50, 80, 30, 0, Math.PI * 2);
-            ctx.arc(80, 80, 40, 0, Math.PI * 2);
-            ctx.arc(110, 80, 30, 0, Math.PI * 2);
+            ctx.arc(350, 80, 20, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            // Sun rays
+            ctx.strokeStyle = 'rgba(255, 215, 0, 0.4)';
+            ctx.lineWidth = 2;
+            for (let i = 0; i < 8; i++) {
+                const angle = (i * Math.PI) / 4;
+                const x1 = 350 + Math.cos(angle) * 30;
+                const y1 = 80 + Math.sin(angle) * 30;
+                const x2 = 350 + Math.cos(angle) * 45;
+                const y2 = 80 + Math.sin(angle) * 45;
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+            }
+
+            // Enhanced clouds with subtle variations
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            
+            // Cloud 1 (larger and more detailed)
+            ctx.beginPath();
+            ctx.arc(50, 80, 28, 0, Math.PI * 2);
+            ctx.arc(78, 80, 35, 0, Math.PI * 2);
+            ctx.arc(105, 80, 28, 0, Math.PI * 2);
+            ctx.arc(78, 65, 20, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Cloud 2 (different position and size)
+            ctx.beginPath();
+            ctx.arc(280, 110, 22, 0, Math.PI * 2);
+            ctx.arc(300, 110, 28, 0, Math.PI * 2);
+            ctx.arc(320, 110, 22, 0, Math.PI * 2);
+            ctx.arc(300, 95, 18, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Small cloud 3 (for variety)
+            ctx.beginPath();
+            ctx.arc(150, 60, 15, 0, Math.PI * 2);
+            ctx.arc(165, 60, 20, 0, Math.PI * 2);
+            ctx.arc(180, 60, 15, 0, Math.PI * 2);
             ctx.fill();
 
-            ctx.beginPath();
-            ctx.arc(300, 120, 25, 0, Math.PI * 2);
-            ctx.arc(325, 120, 35, 0, Math.PI * 2);
-            ctx.arc(350, 120, 25, 0, Math.PI * 2);
-            ctx.fill();
+            // Realistic city skyline background
+            const buildings = [
+                {x: 20, width: 28, height: 120, color: '#DDA0DD'},  // Plum
+                {x: 58, width: 32, height: 160, color: '#98FB98'},  // Pale green
+                {x: 100, width: 38, height: 200, color: '#F0E68C'}, // Khaki
+                {x: 148, width: 42, height: 180, color: '#E6E6FA'}, // Lavender
+                {x: 200, width: 35, height: 150, color: '#FFB6C1'}, // Light pink
+                {x: 245, width: 40, height: 170, color: '#B0E0E6'}, // Powder blue
+                {x: 295, width: 48, height: 220, color: '#F5DEB3'}, // Wheat
+                {x: 353, width: 32, height: 140, color: '#D8BFD8'}, // Thistle
+                {x: 395, width: 28, height: 110, color: '#AFEEEE'}  // Pale turquoise
+            ];
+
+            // Draw buildings with shadows
+            buildings.forEach(building => {
+                // Building shadow
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+                ctx.fillRect(building.x + 3, canvas.height - 50, building.width, 15);
+                
+                // Building body (flat, no shading)
+                ctx.fillStyle = building.color;
+                ctx.fillRect(building.x, canvas.height - 50 - building.height, building.width, building.height);
+                
+                // Building outline (lighter)
+                ctx.strokeStyle = '#666666';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(building.x, canvas.height - 50 - building.height, building.width, building.height);
+                
+                // Building windows with more detail (fixed lighting)
+                const windowRows = Math.floor(building.height / 25);
+                const windowCols = Math.floor(building.width / 10);
+                for (let row = 0; row < windowRows; row++) {
+                    for (let col = 0; col < windowCols; col++) {
+                        const windowX = building.x + 4 + col * 10;
+                        const windowY = canvas.height - 50 - building.height + 8 + row * 25;
+                        
+                        // Window frame
+                        ctx.fillStyle = '#1A1A1A';
+                        ctx.fillRect(windowX - 1, windowY - 1, 6, 10);
+                        
+                        // Window glass (fixed pattern - no flashing)
+                        if ((row + col) % 3 === 0) {
+                            ctx.fillStyle = '#FFD700'; // Lit windows
+                        } else {
+                            ctx.fillStyle = '#2F2F2F'; // Dark windows
+                        }
+                        ctx.fillRect(windowX, windowY, 4, 8);
+                    }
+                }
+                
+                // Building base/entrance
+                ctx.fillStyle = '#1A1A1A';
+                ctx.fillRect(building.x - 2, canvas.height - 50, building.width + 4, 8);
+            });
+
+            // Ground layer (simple brown earth)
+            ctx.fillStyle = '#8B4513';
+            ctx.fillRect(0, canvas.height - 50, canvas.width, 50);
+            
+            // Ground texture
+            ctx.fillStyle = '#A0522D';
+            for (let i = 0; i < 100; i++) {
+                const x = Math.random() * canvas.width;
+                const y = canvas.height - 50 + Math.random() * 50;
+                const size = 1 + Math.random() * 3;
+                ctx.fillRect(x, y, size, size);
+            }
         }
 
         // Game loop
