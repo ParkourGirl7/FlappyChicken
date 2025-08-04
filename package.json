@@ -1,0 +1,29 @@
+{
+  "name": "flappy-chicken",
+  "version": "1.0.0",
+  "description": "A fun Flappy Bird-style game featuring a cute chicken character",
+  "main": "index.html",
+  "scripts": {
+    "start": "open index.html",
+    "serve": "python3 -m http.server 8000",
+    "dev": "python3 -m http.server 8000"
+  },
+  "keywords": [
+    "game",
+    "flappy-bird",
+    "chicken",
+    "html5",
+    "canvas",
+    "javascript"
+  ],
+  "author": "Rithi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/flappy-chicken.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/flappy-chicken/issues"
+  },
+  "homepage": "https://github.com/yourusername/flappy-chicken#readme"
+} 
