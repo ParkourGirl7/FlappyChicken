@@ -5,9 +5,23 @@ A fun and addictive Flappy Bird-style game featuring a cute chicken character!
 ## How to Play
 
 ### Getting Started
+
+#### Option 1: Direct File Opening (Simplest)
 1. Open `flappy-bird.html` in your web browser
 2. The game will start automatically
 3. Your chicken will begin falling due to gravity
+
+#### Option 2: Local Development Server (Recommended)
+1. Open terminal in the project directory
+2. Run: `python3 -m http.server 8000`
+3. Open your browser and go to: `http://localhost:8000/flappy-bird.html`
+4. The game will start automatically
+5. Your chicken will begin falling due to gravity
+
+#### Option 3: Using npm (if you have Node.js)
+1. Install Node.js if you haven't already
+2. Run: `npm start`
+3. The game will open in your default browser
 
 ### Controls
 - **Click** anywhere on the game screen to make the chicken flap
@@ -49,11 +63,34 @@ The game ends when:
 - Pure JavaScript (no external libraries)
 - Responsive design
 - Works on desktop and mobile browsers
+- No external dependencies required
 
-## File Structure
+## Development
+
+### Running Locally
+The game can be run in several ways:
+
+1. **Direct file opening**: Simply open `flappy-bird.html` in any modern browser
+2. **Local server**: Use `python3 -m http.server 8000` for development
+3. **npm scripts**: Use `npm start` if you have Node.js installed
+
+### File Structure
+```
+FlappyChicken/
+├── flappy-bird.html  # Main game file
+├── README.md         # This instruction file
+├── package.json      # Project configuration
+├── LICENSE           # MIT license
+└── .gitignore        # Git ignore rules
+```
+
+## Project Files
 ```
 flappy-bird.html  - The main game file
 README.md        - This instruction file
+package.json     - Project configuration and scripts
+LICENSE          - MIT license
+.gitignore       - Git ignore rules
 ```
 
 Enjoy playing Flappy Chicken! 🐔🎮 
