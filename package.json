@@ -2,9 +2,9 @@
   "name": "flappy-chicken",
   "version": "1.0.0",
   "description": "A fun Flappy Bird-style game featuring a cute chicken character",
-  "main": "index.html",
+  "main": "flappy-bird.html",
   "scripts": {
-    "start": "open index.html",
+    "start": "open flappy-bird.html",
     "serve": "python3 -m http.server 8000",
     "dev": "python3 -m http.server 8000"
   },
